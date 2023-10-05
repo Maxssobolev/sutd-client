@@ -12,7 +12,7 @@ export const AppRouter: FC = () => {
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {routes.map((route, idx) => {
-            return route.element && <Route key={idx} path={route.path} element={<route.element />} />;
+            return route.element && <Route key={idx} path={route.path} element={<route.element name={route.name} />} />;
           })}
           <Route path="/" element={<Navigate to="/main" replace />} />
         </Routes>

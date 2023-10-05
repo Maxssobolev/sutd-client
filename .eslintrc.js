@@ -29,6 +29,7 @@ module.exports = {
       ignoreVoid: true
     }],
     "@typescript-eslint/naming-convention": [0],
-    "@typescript-eslint/no-unused-vars": [1]
+    "@typescript-eslint/no-unused-vars": [1],
+    "@typescript-eslint/no-explicit-any": [1]
   }
 };

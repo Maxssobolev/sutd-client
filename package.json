@@ -4,11 +4,17 @@
   "private": true,
   "author": "Maxssobolev",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.12",
+    "@mui/x-data-grid": "^6.16.0",
+    "axios": "^1.5.1",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0",
+    "swr": "^2.2.4",
     "typescript": "^4.4.2"
   },
   "devDependencies": {
