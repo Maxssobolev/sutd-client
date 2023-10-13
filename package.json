@@ -68,7 +68,7 @@
   },
   "scripts": {
     "webpack": "webpack",
-    "start": "npm run watch:css && webpack serve --env port=3001",
+    "start": "webpack serve --env port=3001",
     "build": "npm run watch:css && webpack --env mode=production",
     "build:dev": "webpack  --env mode=development",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",

@@ -7,12 +7,14 @@ import { columns } from '../config/table.config';
 import useSWR, { SWRResponse } from 'swr';
 import { type Client } from 'entities/Client';
 import { $hostGet } from 'shared/http/helpers/hostGet';
+import { GetResponse } from 'shared/types/api/getResponse';
+import { GetAllClients } from 'shared/types/api/clients';
 
 
 export const ClientsPage: FC<IPage> = ({name}) => {
   const [paginationModel, setPaginationModel] = useState({
-    page: 0,
-    pageSize: 5,
+    page: 1,
+    pageSize: 10,
   });
   const [term, setTerm] = useState('');
   const [queryOptions, setQueryOptions] = useState<{ sortModel: GridSortItem[] } | ''>('');
@@ -21,8 +23,8 @@ export const ClientsPage: FC<IPage> = ({name}) => {
     setQueryOptions({ sortModel: [...sortModel] });
   }, []);
   
-  const { data: clients, isLoading }: SWRResponse<{ count: number; rows: Client[] }> = useSWR(
-    `api/clients?page=${paginationModel.page}&limit=${paginationModel.pageSize}&searchUser=${term}&sortmodel=${JSON.stringify(queryOptions)}`,
+  const { data: clients, isLoading }: SWRResponse<GetResponse<GetAllClients>> = useSWR(
+    `api/clients?page=${paginationModel.page}&limit=${paginationModel.pageSize}&search=${term}&sortmodel=${JSON.stringify(queryOptions)}`,
     $hostGet,
   );
 
