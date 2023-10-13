@@ -9,7 +9,8 @@ import { type Client } from 'entities/Client';
 import { $hostGet } from 'shared/http/helpers/hostGet';
 import { GetResponse } from 'shared/types/api/getResponse';
 import { GetAllClients } from 'shared/types/api/clients';
-
+import { TextInput } from 'flowbite-react';
+import {HiOutlineSearch} from 'react-icons/hi'
 
 export const ClientsPage: FC<IPage> = ({name}) => {
   const [paginationModel, setPaginationModel] = useState({
@@ -31,6 +32,16 @@ export const ClientsPage: FC<IPage> = ({name}) => {
   return (
     <div className={classes.ClientsPage}>
       <h1 className='text-lg'>{name}</h1>
+      <div className="mt-9 flex justify-end">
+        <TextInput
+          sizing="large"
+          type="text"
+          rightIcon={HiOutlineSearch}
+          placeholder='Поиск по ФИО'
+          value={term}
+          onChange={e => setTerm(e.target.value)}
+        />
+      </div>
       <div className='mt-9'>
         <DataGrid
           {...myDG}
