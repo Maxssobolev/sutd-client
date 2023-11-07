@@ -1,14 +1,15 @@
+import { CCard, CCardBody, CCardHeader, CCardText, CCardTitle } from '@coreui/react';
+
 import { FC } from 'react';
-import classes from './DashboardPage.module.scss';
 import { IPage } from 'shared/types/page.interface';
-
-
+import classes from './DashboardPage.module.scss';
 
 export const DashboardPage: FC<IPage> = ({name}) => {
 
   return (
     <div className={classes.DashboardPage}>
-      <h1 className='text-lg'>{name}</h1>
+      <h1 className='text-lg'>Добро пожаловать, Максим!</h1>
+      
     </div>
   );
 }

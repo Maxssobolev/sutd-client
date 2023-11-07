@@ -1,24 +1,25 @@
-import { AbonementFormatter, ActionFormatter, LastCallFormatter, MentorFormatter } from '../helpers/formatters';
+import { AbonementFormatter, ActionFormatter, LastCallFormatter } from '../helpers/formatters';
+
 import { GridColDef } from "@mui/x-data-grid"
 
 export const columns: GridColDef[] = [
   {
-    field: 'id',
+    field: 'client_id',
     headerName: 'ID',
     width: 100,
   },
   {
-    field: 'fio',
+    field: 'client_fio',
     headerName: 'ФИО клиента',
     flex: 1,
   },
   {
-    field: 'dob',
+    field: 'client_dob',
     headerName: 'Дата рождения',
     flex: 0.5,
   },
   {
-    field: 'phone',
+    field: 'client_phone',
     headerName: 'Телефон',
     flex: 0.7,
   },

@@ -1,10 +1,12 @@
-
-import { Sidebar } from 'widgets/Sidebar';
-import { AppRouter } from './providers/router/AppRouter';
+import '@coreui/coreui/dist/css/coreui.min.css'
 import './styles/index.scss'
-import { FC } from 'react';
+
 import { PageLayout, RootLayout } from 'shared/ui/Layout';
 
+import { AppRouter } from './providers/router/AppRouter';
+import { FC } from 'react';
+import { OffcanvasClient } from 'widgets/Offcanvas';
+import { Sidebar } from 'widgets/Sidebar';
 
 export const App: FC = () => {
 
@@ -16,6 +18,8 @@ export const App: FC = () => {
           <AppRouter />
         </PageLayout>
       </RootLayout>
+
+      <OffcanvasClient />
     </div>
   );
 }

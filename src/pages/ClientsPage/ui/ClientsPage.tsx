@@ -14,7 +14,7 @@ import {HiOutlineSearch} from 'react-icons/hi'
 
 export const ClientsPage: FC<IPage> = ({name}) => {
   const [paginationModel, setPaginationModel] = useState({
-    page: 1,
+    page: 0,
     pageSize: 10,
   });
   const [term, setTerm] = useState('');
@@ -45,6 +45,7 @@ export const ClientsPage: FC<IPage> = ({name}) => {
       <div className='mt-9'>
         <DataGrid
           {...myDG}
+          getRowId={(row) => row.client_id}
           autoHeight
           columns={columns}
           rows={clients?.rows || []}

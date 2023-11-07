@@ -1,7 +1,8 @@
 import { FC, MouseEvent } from 'react';
-import classes from './Sidebar.module.scss';
+
 import { Sidebar as FSidebar } from 'flowbite-react';
-import { HiChartPie, HiUsers, HiClipboard } from 'react-icons/hi';
+import classes from './Sidebar.module.scss';
+import routes from 'shared/config/routes';
 import { useNavigate } from "react-router-dom";
 
 interface SidebarProps {
@@ -27,34 +28,17 @@ export const Sidebar: FC<SidebarProps> = ({className}) => {
         </FSidebar.Logo>
         <FSidebar.Items>
           <FSidebar.ItemGroup>
-            <FSidebar.Item
+            {routes.map((route, idx) => <FSidebar.Item
+              key={idx}
               href=""
-              icon={HiChartPie}
-              onClick={(e: MouseEvent<HTMLElement>) => linkTo(e)('/dashboard')}
+              icon={route.icon}
+              onClick={(e: MouseEvent<HTMLElement>) => linkTo(e)(route.path)}
             >
               <p>
-                Панель управления
+                {route.name}
               </p>
             </FSidebar.Item>
-            <FSidebar.Item
-              href=""
-              icon={HiUsers}
-              onClick={(e: MouseEvent<HTMLElement>) => linkTo(e)('/clients')}
-            >
-              <p>
-                Клиенты
-              </p>
-            </FSidebar.Item>
-            <FSidebar.Item
-              href=""
-              icon={HiClipboard}
-              onClick={(e: MouseEvent<HTMLElement>) => linkTo(e)('/orders')}
-            >
-              <p>
-                Заявки
-              </p>
-            </FSidebar.Item>
-            
+            )}
           </FSidebar.ItemGroup>
         </FSidebar.Items>
       </FSidebar>

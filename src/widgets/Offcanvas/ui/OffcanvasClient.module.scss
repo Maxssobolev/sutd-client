@@ -1,0 +1,48 @@
+.Offcanvas {
+    min-width: 50vw;
+}
+
+.header {
+    margin-bottom: 25px;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.offsetHeader{
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.client {
+    margin-bottom: 20px;
+}
+
+.row {
+    margin-top: 20px;
+}
+
+.select {
+    border-width: 1px;
+    border-color: #6B7280;
+    border-radius: none;
+    border-radius: 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    background-color: #fff;
+}
+
+.abonement {
+    margin-top: 30px;
+
+}
+
+.paid {
+    font-weight: bold;
+    color: darkgreen;
+}
+
+.unpaid {
+    font-weight: bold;
+    color: darkred;
+}
