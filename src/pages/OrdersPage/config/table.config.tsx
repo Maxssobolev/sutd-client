@@ -1,31 +1,30 @@
-import { AbonementFormatter, ActionFormatter, LastCallFormatter, MentorFormatter } from '../helpers/formatters';
-
+import { ActionFormatter } from '../helpers/formatters';
 import { GridColDef } from "@mui/x-data-grid"
 
 export const columns: GridColDef[] = [
   {
-    field: 'id',
+    field: 'order_id',
     headerName: 'ID',
     width: 100,
   },
   {
-    field: 'client_name',
+    field: 'client_fio',
     headerName: 'ФИО клиента',
     flex: 1,
   },
   
   {
-    field: 'notes',
+    field: 'order_notes',
     headerName: 'Заметки',
     flex: 0.7,
   },
   {
-    field: 'status',
+    field: 'order_status',
     headerName: 'Статус',
     flex: 0.5,
   },
   {
-    field: 'createdat',
+    field: 'order_createdat',
     headerName: 'Последнее обращение',
     //renderCell: cellData => (<LastCallFormatter cell={cellData} />),
     sortable: false,

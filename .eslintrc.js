@@ -25,7 +25,7 @@ module.exports = {
       extensions: ['.js', 'jsx', 'tsx']
     }],
     '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-floating-promises': [1, {
+    '@typescript-eslint/no-floating-promises': [0, {
       ignoreVoid: true
     }],
     "@typescript-eslint/naming-convention": [0],

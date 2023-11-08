@@ -1,7 +1,8 @@
-import { GridRenderCellParams } from "@mui/x-data-grid";
 import { FC } from "react";
+import { GridRenderCellParams } from "@mui/x-data-grid";
 import { HiOutlineBookOpen } from 'react-icons/hi';
-
+import { orderActions } from "entities/Order";
+import { store } from "app/providers/ReduxProvider/ui/ReduxProvider";
 
 //TODO:change
 export const AbonementFormatter: FC<{ cell: GridRenderCellParams }> = ({ cell }) => {
@@ -23,22 +24,12 @@ export const LastCallFormatter: FC<{ cell: GridRenderCellParams }> = ({ cell }) 
   );
 };
 
-//TODO:change
-export const MentorFormatter: FC<{ cell: GridRenderCellParams }> = ({ cell }) => {
-  const cellData = cell.row;
-  return (
-    <div>
-      Соболев М.С.
-    </div>
-  );
-};
 
 //TODO:change
 export const ActionFormatter: FC<{ cell: GridRenderCellParams }> = ({ cell }) => {
   const cellData = cell.row;
-  const open = () => {
-
-  }
+  const open = () => store.dispatch(orderActions.select(cellData.order_id));
+  
   return (
     <div>
       <button onClick={open}>

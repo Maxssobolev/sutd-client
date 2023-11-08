@@ -11,6 +11,7 @@ import { GetResponse } from 'shared/types/api/getResponse';
 import { GetAllClients } from 'shared/types/api/clients';
 import { TextInput } from 'flowbite-react';
 import {HiOutlineSearch} from 'react-icons/hi'
+import { GetAllOrders } from 'shared/types/api/orders';
 
 export const OrdersPage: FC<IPage> = ({name}) => {
   const [paginationModel, setPaginationModel] = useState({
@@ -24,7 +25,7 @@ export const OrdersPage: FC<IPage> = ({name}) => {
     setQueryOptions({ sortModel: [...sortModel] });
   }, []);
   
-  const { data: orders, isLoading }: SWRResponse<GetResponse<GetAllClients>> = useSWR(
+  const { data: orders, isLoading }: SWRResponse<GetResponse<GetAllOrders>> = useSWR(
     `api/orders?page=${paginationModel.page}&limit=${paginationModel.pageSize}&search=${term}&sortmodel=${JSON.stringify(queryOptions)}`,
     $hostGet,
   );
@@ -45,6 +46,7 @@ export const OrdersPage: FC<IPage> = ({name}) => {
       <div className='mt-9'>
         <DataGrid
           {...myDG}
+          getRowId={(row) => row.order_id}
           autoHeight
           columns={columns}
           rows={orders?.rows || []}

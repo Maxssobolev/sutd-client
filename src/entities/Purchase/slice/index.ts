@@ -1,11 +1,11 @@
-import { AbonementScheme } from '../types/client.scheme'
+import { PurchaseScheme } from '../types/purchase.scheme'
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState: AbonementScheme = {
+const initialState: PurchaseScheme = {
   selectedId: null,
 }
 
-export const clientSlice = createSlice({
+export const purchaseSlice = createSlice({
   name: 'purchase',
   initialState,
   reducers: {
@@ -19,5 +19,5 @@ export const clientSlice = createSlice({
   },
 })
 
-export const { actions: clientActions } = clientSlice
-export const { reducer: clientReducer } = clientSlice
+export const { actions: purchaseActions } = purchaseSlice
+export const { reducer: purchaseReducer } = purchaseSlice
