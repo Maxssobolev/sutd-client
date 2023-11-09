@@ -14,7 +14,7 @@ function useMentors(forSelect = true) {
   //GETTING TAGS
   const [data, setData] = useState<ISelectData[]>([]);
   useEffect(() => {
-    $host.get<GetResponse<GetAllMentors>>('/api/mentors?page=0&limit=1000').then(({ data }) => {
+    $host.get<GetResponse<GetAllMentors>>('/api/mentors?page=0&limit=1000&sortmodel=""').then(({ data }) => {
       
       const preparedData: ISelectData[] = data.rows.map(mentor => ({
         id: mentor.mentor_id,

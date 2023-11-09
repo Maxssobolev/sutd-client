@@ -16,7 +16,7 @@ function useAbonements(forSelect = true) {
   //GETTING TAGS
   const [data, setData] = useState<IAbonementSelectData[]>([]);
   useEffect(() => {
-    $host.get<GetResponse<GetAllAbonements>>('/api/abonements?page=0&limit=1000').then(({ data }) => {
+    $host.get<GetResponse<GetAllAbonements>>('/api/abonements?page=0&limit=1000&sortmodel=""').then(({ data }) => {
       
       const preparedData: IAbonementSelectData[] = data.rows.map(abn => ({
         id: abn.abonement_id || 0,

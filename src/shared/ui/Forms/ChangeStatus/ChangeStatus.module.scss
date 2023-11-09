@@ -1,0 +1,33 @@
+.statusUpdaterContainer {
+    position: absolute;
+    left: 180px;
+    top: 24px;
+    display: flex;
+    align-items: center;
+}
+  
+.statusSelect {
+    appearance: none;
+    padding: 5px;
+    padding-right: 1rem !important;
+    text-indent: 1px;
+    text-overflow: '';
+    background-image: none !important;
+    cursor: pointer;
+
+    &:focus{
+        outline: none;
+    }
+}
+  
+.changeStatusButton {
+    border: 1px solid #6B7280;
+    border-left: none;
+    padding: 5px 12px;
+    cursor: pointer;
+}
+  
+.changeStatusButton:hover {
+    color: white;
+    background-color: #6f42c1;
+}

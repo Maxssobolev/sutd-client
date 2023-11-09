@@ -4,7 +4,7 @@
 
 .header {
     margin-bottom: 25px;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.5rem;
 }
 
@@ -33,8 +33,13 @@
 }
 
 .abonement {
-    margin-top: 30px;
+    margin-top: 40px;
 
+    small {
+        font-style: italic;
+        font-size: .8rem;
+        color: #6B7280;
+    }
 }
 
 .paid {
@@ -51,4 +56,36 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 30px;
+    gap: 15px;
+}
+
+.infofield {
+    display: flex;
+    align-items: center;
+
+    input {
+        border: none;
+        padding: 0;
+
+        &:disabled {
+            background: transparent;
+        }
+    }
+
+    label {
+        flex-shrink: 0;
+        margin-right: 5px;
+        margin-bottom: 0;
+    }
+
+    select {
+        border: none;
+        padding: 0;
+
+        &:disabled {
+            background: transparent;
+        }
+    }
+
+    
 }

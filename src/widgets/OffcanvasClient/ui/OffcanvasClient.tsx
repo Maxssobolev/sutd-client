@@ -43,7 +43,7 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
     client_id: 0,
     client_ismember: false,
     client_phone: '',
-    mentor_id: 0,
+    mentor_id: 1,
     mentor_name: '',
     purchase_enddate: '',
     purchase_ispaid: false,
@@ -60,7 +60,7 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
   
     <COffcanvas className={classes.Offcanvas} placement="start" visible={!!clientId} onHide={hide}>
       <COffcanvasHeader>
-        <COffcanvasTitle className={classes.offsetHeader}>Клиент #{clientId}</COffcanvasTitle>
+        <COffcanvasTitle className={classes.offsetHeader}>{clientId == -1 ? 'Добавить' : `Клиент #${clientId}`}</COffcanvasTitle>
         <CCloseButton className="text-reset" onClick={hide}>X</CCloseButton>
       </COffcanvasHeader>
       <COffcanvasBody>
@@ -71,6 +71,11 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
           onSubmit={(values) => {
             if(clientId == -1) {
               //then we create
+              $host.post(`/api/clients`, values).then(r => {           
+                mutate((key:string) => key.includes('api/clients')).then(() => store.dispatch(toastActions.show({type: "success", text: 'Данные добавлены'})));
+              }).catch(() => {
+                store.dispatch(toastActions.show({type: "error", text: 'Ошибка при добавлении'}))
+              })
             } else {
               //then we update
               $host.put(`/api/clients/${clientId}`, values).then(r => {           
@@ -106,8 +111,6 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
                       </Field>
                     </CCol>
                     <CCol>
-                      
-                    
                       <CFormSelect
                         label="Менеджер"
                         onChange={(e) => {
@@ -121,10 +124,10 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
                   </CRow>
                 </div>
 
-                <div className={classes.abonement}>
+                { clientId != -1 ? <div className={classes.abonement}>
                   <h2 className={classes.header}>Сведения по абонементу:</h2>
                   {
-                    (clientId == -1 || !values?.abonement_id || !values?.client_ismember) ? <div className={classes.abonementEntry}>Сведения отсутствуют</div> : <div className={classes.abonementEntry}>
+                    (!values?.abonement_id || !values?.client_ismember) ? <div className={classes.abonementEntry}>Сведения отсутствуют</div> : <div className={classes.abonementEntry}>
                       <CRow>
                         <CCol>
                           <CFormSelect
@@ -149,12 +152,13 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
                       </CRow>
                       
                       <CRow className={classes.row}><CCol>Описание: {values?.abonement_description}</CCol></CRow>
-                      <CRow className={classes.row}><CCol>Стоимость, руб.: {values?.abonement_price}</CCol></CRow>
-                      <CRow className={classes.row}><CCol>Длительность, руб.: {values?.abonement_duration}</CCol></CRow>
+                      <CRow ><CCol>Стоимость, руб.: {values?.abonement_price}</CCol></CRow>
+                      <CRow ><CCol>Длительность, руб.: {values?.abonement_duration}</CCol></CRow>
                       <CRow className={classes.row}><CCol>{(values?.purchase_ispaid && (values?.abonement_id == values?.purchase_abonement_id)) ? <div className={classes.paid}>Оплата получена</div> : <div className={classes.unpaid}>Не оплачен</div> }</CCol></CRow>
                     </div>
                   }
-                </div>
+                </div> : null
+                }
                 <div className={classes.controls}>
                   { dirty && <ApplyBtn duration={1000} color="#17d517" onApply={submitForm} >Сохранить изменения</ApplyBtn>}
                   

@@ -6,6 +6,7 @@ import { PageLayout, RootLayout } from 'shared/ui/Layout';
 import { AppRouter } from './providers/router/AppRouter';
 import { FC } from 'react';
 import { OffcanvasClient } from 'widgets/OffcanvasClient';
+import { OffcanvasOrder } from 'widgets/OffcanvasOrder';
 import { Sidebar } from 'widgets/Sidebar';
 import { Toaster } from 'shared/ui/Toaster/Toaster';
 
@@ -21,6 +22,7 @@ export const App: FC = () => {
       </RootLayout>
 
       <OffcanvasClient />
+      <OffcanvasOrder />
       <Toaster />
     </div>
   );

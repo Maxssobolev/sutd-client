@@ -27,7 +27,6 @@ export const columns: GridColDef[] = [
     field: 'abonement_duration',
     headerName: 'Длительность, дн.',
     //renderCell: cellData => (<LastCallFormatter cell={cellData} />),
-    sortable: false,
     flex: 1,
   },
   {

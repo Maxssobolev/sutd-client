@@ -27,21 +27,18 @@ export const columns: GridColDef[] = [
     field: 'abonement_status',
     headerName: 'Абонемент',
     //renderCell: cellData => (<AbonementFormatter cell={cellData} />),
-    sortable: false,
     flex: 0.5,
   },
   {
     field: 'last_order_date',
     headerName: 'Последнее обращение',
     renderCell: cellData => (<LastCallFormatter cell={cellData} />),
-    sortable: false,
     flex: 1,
   },
   {
     field: 'mentor_name',
     headerName: 'Сотрудник',
     //renderCell: cellData => (<MentorFormatter cell={cellData} />),
-    sortable: false,
     flex: 1,
   },
   {

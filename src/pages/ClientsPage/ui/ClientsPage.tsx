@@ -5,12 +5,14 @@ import { DataGrid, GridSortItem, GridSortModel } from '@mui/x-data-grid';
 import { myDG } from 'shared/config/dataGridCustomOpt';
 import { columns } from '../config/table.config';
 import useSWR, { SWRResponse } from 'swr';
-import { type Client } from 'entities/Client';
+import { clientActions, type Client } from 'entities/Client';
 import { $hostGet } from 'shared/http/helpers/hostGet';
 import { GetResponse } from 'shared/types/api/getResponse';
 import { GetAllClients } from 'shared/types/api/clients';
 import { TextInput } from 'flowbite-react';
 import {HiOutlineSearch} from 'react-icons/hi'
+import { CButton } from '@coreui/react';
+import { store } from 'app/providers/ReduxProvider/ui/ReduxProvider';
 
 export const ClientsPage: FC<IPage> = ({name}) => {
   const [paginationModel, setPaginationModel] = useState({
@@ -32,7 +34,10 @@ export const ClientsPage: FC<IPage> = ({name}) => {
   return (
     <div className={classes.ClientsPage}>
       <h1 className='text-lg'>{name}</h1>
-      <div className="mt-9 flex justify-end">
+      <div className="mt-9 flex justify-between">
+        <div className={classes.controls}>
+          <CButton color='primary' variant="outline" onClick={() => store.dispatch(clientActions.select(-1))}>Добавить</CButton>
+        </div>
         <TextInput
           sizing="large"
           type="text"

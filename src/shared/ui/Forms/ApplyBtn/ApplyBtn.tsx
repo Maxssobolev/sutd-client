@@ -19,7 +19,7 @@ export const ApplyBtn: FC<ApplyBtnProps> = ({ className, duration, children, col
   const [buttonStyle, setButtonStyle] = useState<CSSProperties>(initialBtnStyle);
   const animationFrameId = useRef<number | null>(null);
   
-  const animateButton = () => {
+  const animateButton = async () => {
     if (buttonRef.current) {
       const button = buttonRef.current;
       const start = performance.now();
