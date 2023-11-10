@@ -4,4 +4,6 @@ export interface Purchase {
     purchase_paymentmethod: string | null,
     purchase_ispaid: boolean,
     purchase_abonement_id: number | null,
+    purchase_id: number | null,
+    purchase_client_id: number | null,
 }

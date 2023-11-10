@@ -16,6 +16,7 @@ import { RootStateSchema } from 'app/providers/ReduxProvider';
 import { classNames } from 'shared/lib/helpers/classNames/classNames';
 import classes from './OffcanvasOrder.module.scss';
 import { clientActions } from 'entities/Client/slice';
+import moment from 'moment';
 import { orderActions } from 'entities/Order';
 import { store } from 'app/providers/ReduxProvider/ui/ReduxProvider';
 import { toastActions } from 'entities/Toast';
@@ -30,7 +31,7 @@ interface OffcanvasProps {
 //clientId can be -1 if we create one
 export const OffcanvasOrder: FC<OffcanvasProps> = ({className}) => {
   const orderId = useSelector<RootStateSchema, number | null>(state => state.order.selectedId)
-  const { data: purchase, isLoading }: SWRResponse<GetOneOrder> = useSWR(
+  const { data: order, isLoading }: SWRResponse<GetOneOrder> = useSWR(
     orderId == -1 || orderId == null ? null : `api/orders/${orderId}`,
     $hostGet,
   );
@@ -46,23 +47,25 @@ export const OffcanvasOrder: FC<OffcanvasProps> = ({className}) => {
     abonement_title: '',
     client_dob: '',
     order_client_id: 0,
-    order_createdat: '',
+    order_createdat: moment().format('YYYY-MM-DD'),
     order_id: 0,
     order_mentor_id: 0,
     order_notes: '',
     order_status: OrderStatus.notStated,
     client_fio: '',
-    client_id: 0,
+    client_id: 1,
     client_ismember: false,
     client_phone: '',
-    mentor_id: 0,
+    mentor_id: 1,
     mentor_name: '',
     purchase_enddate: '',
     purchase_ispaid: false,
     purchase_paymentmethod: '',
     purchase_startdate: '',
     purchase_abonement_id: null,
-  } : purchase!
+    purchase_client_id: null,
+    purchase_id: null,
+  } : order!
   
   const hide = () => {
     store.dispatch(orderActions.deselect())
@@ -210,7 +213,7 @@ export const OffcanvasOrder: FC<OffcanvasProps> = ({className}) => {
                              */
                           onChange={(e) => {
                             const edata = JSON.parse(e.target.value) as Abonement;
-                    
+                          
                             setFieldValue('abonement_id', edata.abonement_id);
                             setFieldValue('abonement_price', edata.abonement_price);
                             setFieldValue('abonement_duration', edata.abonement_duration);
@@ -234,7 +237,10 @@ export const OffcanvasOrder: FC<OffcanvasProps> = ({className}) => {
                 
                 <div className={classes.controls}>
                   { dirty && !values?.purchase_ispaid && values?.abonement_id ? <ApplyBtn duration={1000} color="#172ad5" onApply={async () => {
-                    await setFieldValue('purchase_ispaid', true);
+                    setFieldValue('purchase_ispaid', true);
+                    setFieldValue('purchase_startdate', moment().format('YYYY-MM-DD'));
+                    setFieldValue('purchase_enddate', moment().add(values?.abonement_duration, 'd').format('YYYY-MM-DD'));                    
+                  
                     setTimeout(() => {submitForm()}, 100);
                   }}>Сохранить и провести</ApplyBtn> : null}
                   { dirty && <ApplyBtn duration={1000} color="#17d517" onApply={submitForm} >Сохранить изменения</ApplyBtn>}

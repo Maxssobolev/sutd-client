@@ -50,6 +50,8 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
     purchase_paymentmethod: '',
     purchase_startdate: '',
     purchase_abonement_id: null,
+    purchase_client_id: null,
+    purchase_id: null,
   } : client!
   
   const hide = () => {
