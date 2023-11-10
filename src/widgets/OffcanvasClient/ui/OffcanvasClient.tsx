@@ -127,7 +127,7 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
                 { clientId != -1 ? <div className={classes.abonement}>
                   <h2 className={classes.header}>Сведения по абонементу:</h2>
                   {
-                    (!values?.abonement_id || !values?.client_ismember) ? <div className={classes.abonementEntry}>Сведения отсутствуют</div> : <div className={classes.abonementEntry}>
+                    (!values?.abonement_id) ? <div className={classes.abonementEntry}>Сведения отсутствуют</div> : <div className={classes.abonementEntry}>
                       <CRow>
                         <CCol>
                           <CFormSelect
