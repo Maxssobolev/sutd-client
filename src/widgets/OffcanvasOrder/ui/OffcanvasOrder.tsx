@@ -36,7 +36,7 @@ export const OffcanvasOrder: FC<OffcanvasProps> = ({className}) => {
     $hostGet,
   );
   const mentors = useMentors()
-  const abonements = useAbonements()
+  const abonements = useAbonements(!!orderId) // trick for updating abonements request 
   const clients = useClients()
   
   const initialValues: GetOneOrder = orderId == -1 || orderId == null ? {
@@ -83,11 +83,12 @@ export const OffcanvasOrder: FC<OffcanvasProps> = ({className}) => {
         <Formik
           initialValues={initialValues}
           enableReinitialize
-          onSubmit={(values) => {
+          onSubmit={(values, {resetForm}) => {
             if(orderId == -1) {
               //then we create
               $host.post(`/api/orders`, values).then(r => {           
                 mutate((key:string) => key.includes('api/orders')).then(() => store.dispatch(toastActions.show({type: "success", text: 'Данные добавлены'})));
+                resetForm();
               }).catch(() => {
                 store.dispatch(toastActions.show({type: "error", text: 'Ошибка при добавлении'}))
               })
@@ -230,7 +231,7 @@ export const OffcanvasOrder: FC<OffcanvasProps> = ({className}) => {
                     <CRow className={classes.row}><CCol>Описание: {values?.abonement_description}</CCol></CRow>
                     <CRow ><CCol>Стоимость, руб.: {values?.abonement_price}</CCol></CRow>
                     <CRow ><CCol>Длительность, руб.: {values?.abonement_duration}</CCol></CRow>
-                    <CRow className={classes.row}><CCol>{(values?.purchase_ispaid && (values?.abonement_id == values?.purchase_abonement_id)) ? <div className={classes.paid}>Оплата получена</div> : <div className={classes.unpaid}>Не оплачен</div> }</CCol></CRow>
+                    <CRow className={classes.row}><CCol>{(values?.purchase_ispaid && (values?.abonement_id == values?.purchase_abonement_id)) ? <div className={classes.paid}>Оплачен до {moment(values.purchase_enddate).format('DD.MM.YYYY')}</div> : <div className={classes.unpaid}>Не оплачен</div> }</CCol></CRow>
                   </div>
                   
                 </div>

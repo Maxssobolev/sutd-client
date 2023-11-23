@@ -17,7 +17,7 @@ export const ReduxProvider: FC<ReduxProviderProps> = ({children, className}) => 
   return (
     <Provider store={store}>
       {
-        children as any
+        children
       }
     </Provider>
   );

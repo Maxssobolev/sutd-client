@@ -1,4 +1,5 @@
-import { ActionFormatter } from '../helpers/formatters';
+import { ActionFormatter, OrderNotesFormatter } from '../helpers/formatters';
+
 import { GridColDef } from "@mui/x-data-grid"
 
 export const columns: GridColDef[] = [
@@ -17,6 +18,7 @@ export const columns: GridColDef[] = [
     field: 'order_notes',
     headerName: 'Заметки',
     flex: 0.7,
+    renderCell: cellData => (<OrderNotesFormatter cell={cellData} />),
   },
   {
     field: 'order_status',

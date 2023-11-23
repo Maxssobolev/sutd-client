@@ -2,6 +2,7 @@ import { RootStateSchema } from "./schema";
 import { abonementReducer } from "entities/Abonement";
 import { clientReducer } from "entities/Client";
 import { configureStore } from "@reduxjs/toolkit";
+import { modalReducer } from "entities/Modal";
 import { orderReducer } from "entities/Order";
 import { purchaseReducer } from "entities/Purchase";
 import { toastReducer } from "entities/Toast";
@@ -13,7 +14,8 @@ export function createReduxStore(initialState?: RootStateSchema) {
       toast: toastReducer,
       abonement: abonementReducer,
       purchase: purchaseReducer,
-      order: orderReducer
+      order: orderReducer,
+      modal: modalReducer
     },
     devTools: __IS_DEV__,
     preloadedState: initialState

@@ -5,6 +5,8 @@ import { PageLayout, RootLayout } from 'shared/ui/Layout';
 
 import { AppRouter } from './providers/router/AppRouter';
 import { FC } from 'react';
+import { ModalWizard } from 'widgets/ModalWizard';
+import { OffcanvasAbonement } from 'widgets/OffcanvasAbonement';
 import { OffcanvasClient } from 'widgets/OffcanvasClient';
 import { OffcanvasOrder } from 'widgets/OffcanvasOrder';
 import { Sidebar } from 'widgets/Sidebar';
@@ -23,6 +25,8 @@ export const App: FC = () => {
 
       <OffcanvasClient />
       <OffcanvasOrder />
+      <OffcanvasAbonement />
+      <ModalWizard />
       <Toaster />
     </div>
   );

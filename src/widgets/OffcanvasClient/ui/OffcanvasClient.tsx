@@ -10,9 +10,11 @@ import { ApplyBtn } from 'shared/ui/Forms/ApplyBtn/ApplyBtn';
 import { Client } from 'entities/Client';
 import { FC } from 'react';
 import { GetOneClient } from 'shared/types/api/clients';
+import InputMask from 'react-input-mask';
 import { RootStateSchema } from 'app/providers/ReduxProvider';
 import classes from './OffcanvasClient.module.scss';
 import { clientActions } from 'entities/Client/slice';
+import moment from 'moment';
 import { store } from 'app/providers/ReduxProvider/ui/ReduxProvider';
 import { toastActions } from 'entities/Toast';
 import useMentors from 'shared/hooks/useMentors';
@@ -30,7 +32,7 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
     $hostGet,
   );
   const mentors = useMentors()
-  const abonements = useAbonements()
+  const abonements = useAbonements(!!clientId)
   
   const initialValues: GetOneClient = clientId == -1 || clientId == null ? {
     abonement_description: '',
@@ -70,11 +72,12 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
         <Formik
           initialValues={initialValues}
           enableReinitialize
-          onSubmit={(values) => {
+          onSubmit={(values, {resetForm}) => {
             if(clientId == -1) {
               //then we create
               $host.post(`/api/clients`, values).then(r => {           
                 mutate((key:string) => key.includes('api/clients')).then(() => store.dispatch(toastActions.show({type: "success", text: 'Данные добавлены'})));
+                resetForm();
               }).catch(() => {
                 store.dispatch(toastActions.show({type: "error", text: 'Ошибка при добавлении'}))
               })
@@ -102,7 +105,16 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
                     </CCol>
                     <CCol>
                       <Field name="client_phone">{({ field }: FieldProps) => 
-                        <CFormInput type="tel" label="Телефон" {...field} />}
+                        <div className={classes.artificialLabel}>
+                          <label>Телефон</label>
+                          <InputMask
+                            mask="+7 (999) 999-99-99"
+                            maskChar={null}
+                            type="tel"
+                            {...field}
+                          />
+                        </div>
+                      }
                       </Field>
                     </CCol>
                   </CRow>
@@ -129,7 +141,7 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
                 { clientId != -1 ? <div className={classes.abonement}>
                   <h2 className={classes.header}>Сведения по абонементу:</h2>
                   {
-                    (!values?.abonement_id) ? <div className={classes.abonementEntry}>Сведения отсутствуют</div> : <div className={classes.abonementEntry}>
+                    (!values?.abonement_id) ? <div className={classes.abonementEntry}>Сведения отсутствуют. Чтобы добавить абонемент, заведите заявку на клиента.</div> : <div className={classes.abonementEntry}>
                       <CRow>
                         <CCol>
                           <CFormSelect
@@ -155,8 +167,8 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
                       
                       <CRow className={classes.row}><CCol>Описание: {values?.abonement_description}</CCol></CRow>
                       <CRow ><CCol>Стоимость, руб.: {values?.abonement_price}</CCol></CRow>
-                      <CRow ><CCol>Длительность, руб.: {values?.abonement_duration}</CCol></CRow>
-                      <CRow className={classes.row}><CCol>{(values?.purchase_ispaid && (values?.abonement_id == values?.purchase_abonement_id)) ? <div className={classes.paid}>Оплата получена</div> : <div className={classes.unpaid}>Не оплачен</div> }</CCol></CRow>
+                      <CRow ><CCol>Длительность, дней.: {values?.abonement_duration}</CCol></CRow>
+                      <CRow className={classes.row}><CCol>{(values?.purchase_ispaid && (values?.abonement_id == values?.purchase_abonement_id)) ? <div className={classes.paid}>Оплачен до {moment(values.purchase_enddate).format('DD.MM.YYYY')}</div> : <div className={classes.unpaid}>Не оплачен</div> }</CCol></CRow>
                     </div>
                   }
                 </div> : null

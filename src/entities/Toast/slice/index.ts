@@ -11,7 +11,7 @@ export const toastSlice = createSlice({
   name: 'toast',
   initialState,
   reducers: {
-    show: (state, {payload}) => {
+    show: (state, {payload}: {payload: Omit<ToastScheme, 'isShow'>}) => {
       state.isShow = true;
       state.type = payload.type;
       state.text = payload.text || '';

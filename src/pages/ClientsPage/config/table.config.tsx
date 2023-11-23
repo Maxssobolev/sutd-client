@@ -21,13 +21,13 @@ export const columns: GridColDef[] = [
   {
     field: 'client_phone',
     headerName: 'Телефон',
-    flex: 0.7,
+    flex: 0.5,
   },
   {
     field: 'abonement_status',
     headerName: 'Абонемент',
-    //renderCell: cellData => (<AbonementFormatter cell={cellData} />),
-    flex: 0.5,
+    renderCell: cellData => (<AbonementFormatter cell={cellData} />),
+    flex: 0.7,
   },
   {
     field: 'last_order_date',

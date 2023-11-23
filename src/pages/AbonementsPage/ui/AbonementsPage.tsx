@@ -12,6 +12,9 @@ import { GetAllClients } from 'shared/types/api/clients';
 import { TextInput } from 'flowbite-react';
 import {HiOutlineSearch} from 'react-icons/hi'
 import { GetAllAbonements } from 'shared/types/api/abonements';
+import { CButton } from '@coreui/react';
+import { store } from 'app/providers/ReduxProvider/ui/ReduxProvider';
+import { abonementActions } from 'entities/Abonement';
 
 export const AbonementsPage: FC<IPage> = ({name}) => {
   const [paginationModel, setPaginationModel] = useState({
@@ -33,7 +36,10 @@ export const AbonementsPage: FC<IPage> = ({name}) => {
   return (
     <div className={classes.OrdersPage}>
       <h1 className='text-lg'>{name}</h1>
-      <div className="mt-9 flex justify-end">
+      <div className="mt-9 flex justify-between">
+        <div className={classes.controls}>
+          <CButton color='primary' variant="outline" onClick={() => store.dispatch(abonementActions.select(-1))}>Добавить</CButton>
+        </div>
         <TextInput
           sizing="large"
           type="text"
