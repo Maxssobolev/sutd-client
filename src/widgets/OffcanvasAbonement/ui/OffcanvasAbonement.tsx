@@ -59,6 +59,7 @@ export const OffcanvasAbonement: FC<OffcanvasProps> = ({className}) => {
               //then we create
               $host.post(`/api/abonements`, values).then(r => {           
                 mutate((key:string) => key.includes('api/')).then(() => store.dispatch(toastActions.show({type: "success", text: 'Данные добавлены'})));
+                store.dispatch(abonementActions.deselect())
                 resetForm();
               }).catch(() => {
                 store.dispatch(toastActions.show({type: "error", text: 'Ошибка при добавлении'}))

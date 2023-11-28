@@ -77,6 +77,7 @@ export const OffcanvasClient: FC<OffcanvasProps> = ({className}) => {
               //then we create
               $host.post(`/api/clients`, values).then(r => {           
                 mutate((key:string) => key.includes('api/clients')).then(() => store.dispatch(toastActions.show({type: "success", text: 'Данные добавлены'})));
+                store.dispatch(clientActions.deselect())
                 resetForm();
               }).catch(() => {
                 store.dispatch(toastActions.show({type: "error", text: 'Ошибка при добавлении'}))

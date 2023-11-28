@@ -88,6 +88,7 @@ export const OffcanvasOrder: FC<OffcanvasProps> = ({className}) => {
               //then we create
               $host.post(`/api/orders`, values).then(r => {           
                 mutate((key:string) => key.includes('api/orders')).then(() => store.dispatch(toastActions.show({type: "success", text: 'Данные добавлены'})));
+                store.dispatch(orderActions.deselect())
                 resetForm();
               }).catch(() => {
                 store.dispatch(toastActions.show({type: "error", text: 'Ошибка при добавлении'}))

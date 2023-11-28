@@ -10,3 +10,10 @@ export interface GetStats {
     abonement_totalprice: number;
 
 }
+
+export interface GetCommonStats {
+    clients_total_count: string,
+    purchases_total_count: string,
+    purchases_total_amount: string,
+    orders_total_open_count: string,
+}

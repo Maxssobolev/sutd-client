@@ -4,7 +4,7 @@
 
 .chart {
     margin-top: 30px;
-    border: 1px solid gray;
+    border: 1px dashed rgb(173 173 173);
     border-radius: 4px;
     padding: 20px;
     width: 400px;
@@ -13,5 +13,23 @@
 
 .chartHeader {
     margin-bottom: 20px;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    line-height: 1.4rem;
+}
+
+.commonStats{
+    margin-top: 30px;
+    border: 1px dashed rgb(173 173 173);
+    border-radius: 4px;
+    width: 400px;
+    height: 235px;
+}
+
+.widgets{
+    display: flex;
+    gap: 20px
+}
+
+.mainHeader{
+    font-size: 2rem;
 }
